@@ -1,20 +1,33 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, Image, TouchableOpacity } from 'react-native';
+import Loginpage from './Screens/Loginpage';
+import Registrationpage from './Screens/Registrationpage';
+import Homepage from './Screens/Homepage';
+import Recoverypage from './Screens/Recoverypage';
+import LandingPage from './Screens/Landingpage';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-export default function App() {
+const Stack = createNativeStackNavigator();
+
+export default function AppStack() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen component={LandingPage} name="Landing" options={{headerShown:false}}/>
+        <Stack.Screen component={Loginpage} name="Login" options={{headerShown:false}}/>
+        <Stack.Screen component={Homepage} name="Home" options={{headerShown:false}}/>
+        <Stack.Screen component={Registrationpage} name="Register" options={{headerShown:false}}/>
+        <Stack.Screen component={Recoverypage} name="Recovery" options={{headerShown:false}}/>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+function App(){
+  return(
+    <NavigationContainer>
+      <AppStack/>
+    </NavigationContainer>
+  )
+}
