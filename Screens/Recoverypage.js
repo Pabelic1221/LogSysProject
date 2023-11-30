@@ -17,7 +17,7 @@ export default function Recoverypage(navigation) {
       </View>
 
       <TouchableOpacity onPress={() => navigation.navigate('Login')} style={styles.recov}>
-      <AntDesign name="arrowleft" size={24} color='##28c492'/>
+      <AntDesign name="arrowleft" size={24} color='#28c492'/>
             <Text style={{color: '#28c492'}}>Send Recovery Instructions</Text>
         </TouchableOpacity>
     </SafeAreaView> 
