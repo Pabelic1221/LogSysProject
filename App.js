@@ -1,5 +1,3 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, SafeAreaView, Image, TouchableOpacity } from 'react-native';
 import Loginpage from './Screens/Loginpage';
 import Registrationpage from './Screens/Registrationpage';
 import Homepage from './Screens/Homepage';
