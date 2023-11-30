@@ -4,4 +4,4 @@ To open the file you need to install the following code:
   - npm install @react-navigation/native-stack
 Enjoy!
 
-don't forget to follow the github repository owner (Pabelic1221/JushuaP) Thanks!
+Don't forget to follow the github repository owner (Pabelic1221/JushuaP) Thanks!
