@@ -2,20 +2,39 @@ import { View, Text, SafeAreaView, StyleSheet, TextInput, TouchableOpacity, Imag
 import React, { useState } from 'react';
 import { AntDesign, MaterialIcons } from '@expo/vector-icons';
 
-export default function Registrationpage({navigation}) {
+export default function Registrationpage({ navigation }) {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  const handleRegistration = () => {
-    if (password === confirmPassword) {
-      console.log('Registered: ', { username, email, password });
-
-    
-      navigation.navigate('Login', { username });
-    } else {
-      console.error('Passwords do not match!');
+  const handleRegistration = async () => {
+    try {
+      if (password === confirmPassword) {
+        const response = await fetch('http://localhost:8000/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            username,
+            email,
+            password,
+          }),
+        });
+  
+        if (!response.ok) {
+          throw new Error(`Registration failed with status: ${response.status}`);
+        }
+  
+        console.log('Registration successful!');
+        // Continue with your logic for successful registration
+        navigation.navigate('Login', { username });
+      } else {
+        console.error('Passwords do not match!');
+      }
+    } catch (error) {
+      console.error('Registration error:', error.message);
     }
   };
   return (

@@ -1,8 +1,8 @@
 import { View, Text, SafeAreaView, StyleSheet, TextInput, TouchableOpacity, Image } from 'react-native';
-import React, {useState} from 'react'
+import React, { useState } from 'react';
 import { AntDesign } from '@expo/vector-icons';
 
-export default function Loginpage({navigation, route}) {
+export default function Loginpage({ navigation, route }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -10,17 +10,28 @@ export default function Loginpage({navigation, route}) {
 
   const registeredUsername = route.params?.username;
 
-  const handleSignup = () => {
-    console.log('Entered credentials:', { username, password });
-    console.log('Registered username:', registeredUsername);
+  const handleSignup = async () => {
+    try {
+      const response = await fetch('http://localhost:8000/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username,
+          password,
+        }),
+      });
 
-    if (username === registeredUsername) {
-      console.log('Valid credentials');
-      
-      
-      navigation.navigate('Home');
-    } else {
-      console.error('Invalid credentials');
+      if (response.ok) {
+        console.log('Login successful!');
+        // Navigate to the Home screen or any other screen as needed
+        navigation.navigate('Home');
+      } else {
+        console.error('Login failed:', response.status);
+      }
+    } catch (error) {
+      console.error('Login error:', error);
     }
   };
   return (
