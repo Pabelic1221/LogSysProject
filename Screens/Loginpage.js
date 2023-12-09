@@ -5,6 +5,8 @@ import { AntDesign } from '@expo/vector-icons';
 export default function Loginpage({navigation, route}) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [usernamePlaceholder, setUsernamePlaceholder] = useState('Username');
 
   const registeredUsername = route.params?.username;
 
@@ -34,6 +36,8 @@ export default function Loginpage({navigation, route}) {
             placeholder="Username"
             value={username}
             onChangeText={(text) => setUsername(text)}
+            onFocus={() => setUsernamePlaceholder('')}
+            onBlur={() => setUsernamePlaceholder('Username')}
           />
         </View>
 
@@ -44,8 +48,11 @@ export default function Loginpage({navigation, route}) {
             placeholder="Password"
             value={password}
             onChangeText={(text) => setPassword(text)}
-            secureTextEntry={true}
+            secureTextEntry={!showPassword}
           />
+          <TouchableOpacity onPress={() => setShowPassword(!showPassword)} style={styles.eyeIcon}>
+            <AntDesign name={showPassword ? 'eye' : 'eyeo'} size={24} color="black" />
+          </TouchableOpacity>
         </View>
         <TouchableOpacity onPress={() => navigation.navigate('Recovery')} style={{ justifyContent: 'center', alignItems: 'center' }}>
           <Text style={styles.forgot}>Forgot Password?</Text>
